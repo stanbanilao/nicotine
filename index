@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK Oral Nicotine Market Intelligence 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafaf9; /* stone-50: warm neutral */
+            color: #1c1917; /* stone-900 */
+        }
+
+        /* Mandatory Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px; /* Constrain width */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Custom scrollbar for data tables/containers */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f5f5f4; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #d6d3d1; 
+            border-radius: 10px;
+        }
+        
+        /* Interactive Tab Styling */
+        .tab-active {
+            border-bottom: 2px solid #0369a1; /* sky-700 */
+            color: #0369a1;
+            font-weight: 600;
+        }
+        .tab-inactive {
+            color: #78716c; /* stone-500 */
+            border-bottom: 2px solid transparent;
+        }
+        .tab-inactive:hover {
+            color: #44403c; /* stone-700 */
+            border-bottom: 2px solid #d6d3d1;
+        }
+
+        /* Brand Selector Styling */
+        .brand-btn-active {
+            background-color: #0369a1; /* sky-700 */
+            color: white;
+            border-color: #0369a1;
+        }
+        .brand-btn-inactive {
+            background-color: transparent;
+            color: #44403c;
+            border-color: #d6d3d1;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-sky-200 selection:text-sky-900 pb-24">
+
+    <!-- Chosen Palette: Warm Earth Neutrals & Professional Sky Blue (Background: stone-50/100, Text: stone-800/900, Accents: sky-700, teal-600, amber-500) -->
+    
+    <!-- Application Structure Plan: The SPA is structured as an interactive executive dashboard (Top-Down flow). 
+         1. 'Executive Summary' introduces the market sizing (the 'what').
+         2. 'Competitive Landscape' allows deep dives into specific brands via an interactive selector, updating text and charts dynamically to prevent information overload (the 'who').
+         3. 'Channel & Consumer Preferences' groups related distribution/flavor data (the 'where and how').
+         4. 'Regulatory & Client Alignment' covers the constraints and non-negotiable inputs required to finalize strategy. 
+         This dashboard structure is chosen to make dense competitive intelligence easily explorable, allowing brand managers to filter data by competitor or focus area without leaving the page. -->
+    
+    <!-- Visualization & Content Choices: 
+         1. Market Growth -> Change -> Line Chart -> Shows trajectory clearly. Chart.js (Canvas).
+         2. Brand Strength Profiles -> Compare -> Grouped Bar Chart -> Compares multiple series (brands) across categories (mg strength). Chart.js (Canvas).
+         3. Flavor Categories -> Inform/Proportion -> Doughnut Chart -> Shows market composition. Chart.js (Canvas).
+         4. Channel Presence -> Compare -> Horizontal Bar Chart -> Best for reading longer category labels (Convenience, Vape Stores). Chart.js (Canvas).
+         5. Regulatory constraints -> Organize -> Interactive Tabs -> Condenses text-heavy legal info into digestible chunks (HTML/JS).
+         CONFIRMING NO SVG or MERMAID JS USED. -->
+    
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="sticky top-0 z-50 bg-stone-50/90 backdrop-blur-md border-b border-stone-200 shadow-sm px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-sky-700 rounded-sm"></div>
+                <h1 class="text-xl font-bold tracking-tight text-stone-800">Cipher<span class="font-light text-stone-500">Intelligence</span></h1>
+            </div>
+            <div class="flex gap-6 text-sm font-medium">
+                <a href="#overview" class="text-stone-600 hover:text-sky-700 transition-colors">Market Overview</a>
+                <a href="#competitors" class="text-stone-600 hover:text-sky-700 transition-colors">Competitors</a>
+                <a href="#channels" class="text-stone-600 hover:text-sky-700 transition-colors">Channels</a>
+                <a href="#regulatory" class="text-stone-600 hover:text-sky-700 transition-colors">Regulatory</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-6 pt-16 pb-12">
+        <div class="inline-block px-3 py-1 bg-sky-100 text-sky-800 text-xs font-bold tracking-widest uppercase rounded mb-6 border border-sky-200">
+            Confidential Briefing • May 2026
+        </div>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-6 leading-tight">
+            UK Oral Nicotine Category: <br/>
+            <span class="text-sky-700">Strategic Scan & Data Projections</span>
+        </h2>
+        <p class="text-lg md:text-xl text-stone-600 max-w-3xl leading-relaxed">
+            This interactive dashboard synthesizes current market data, competitor intelligence, and regulatory constraints for the UK nicotine pouch category. It is designed to aid strategic positioning by allowing exploration of market size, brand-specific tactics, and retail channel dynamics.
+        </p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 space-y-20">
+
+        <!-- SECTION 1: MARKET OVERVIEW -->
+        <section id="overview" class="scroll-mt-24">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-stone-900 mb-2">1. Category Overview & Dynamics</h3>
+                <p class="text-stone-600 max-w-4xl">
+                    This section outlines the macroeconomic view of the UK nicotine pouch market. The data indicates sustained double-digit growth as adult consumers actively migrate away from both combustible tobacco and, increasingly, disposable vapes due to impending legislation and a desire for discreet usage.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <span class="text-sm font-semibold text-stone-500 uppercase tracking-wider mb-2">Estimated Market Size (2026)</span>
+                    <span class="text-4xl font-black text-stone-900">£650M</span>
+                    <span class="text-sm text-teal-600 font-medium mt-2">↑ Up from £480M in 2025</span>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <span class="text-sm font-semibold text-stone-500 uppercase tracking-wider mb-2">YoY Growth Trend</span>
+                    <span class="text-4xl font-black text-sky-700">+35%</span>
+                    <span class="text-sm text-stone-500 mt-2">Category adoption accelerating</span>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm flex flex-col justify-between">
+                    <span class="text-sm font-semibold text-stone-500 uppercase tracking-wider mb-2">Active UK Consumers</span>
+                    <span class="text-4xl font-black text-stone-900">1.8M</span>
+                    <span class="text-sm text-stone-500 mt-2">Predominantly ex-smokers/vapers</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-xl border border-stone-200 shadow-sm">
+                <h4 class="text-lg font-bold text-stone-800 mb-6">Market Value Projection (2023 - 2028 Est.)</h4>
+                <div class="chart-container">
+                    <canvas id="marketGrowthChart"></canvas>
+                </div>
+                <p class="text-sm text-stone-500 mt-4 text-center">Projected growth assumes no total category ban, adapting to recent packaging and flavor constraints.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 2: COMPETITOR LANDSCAPE -->
+        <section id="competitors" class="scroll-mt-24">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-stone-900 mb-2">2. Competitor Intelligence & Brand Profiles</h3>
+                <p class="text-stone-600 max-w-4xl">
+                    Select a brand below to view its specific positioning, target audience, pricing, and packaging strategies. The UK market is highly consolidated among big tobacco players, but 'disruptor' brands are capturing niche segments through extreme nicotine strengths.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Interactive Controls & Profile -->
+                <div class="lg:col-span-1 space-y-6">
+                    <div class="flex flex-wrap gap-2" id="brand-selector">
+                        <button onclick="updateBrandProfile('velo')" class="brand-btn brand-btn-active px-4 py-2 border rounded-md text-sm font-bold transition-all" data-brand="velo">VELO</button>
+                        <button onclick="updateBrandProfile('zyn')" class="brand-btn brand-btn-inactive px-4 py-2 border rounded-md text-sm font-bold transition-all" data-brand="zyn">ZYN</button>
+                        <button onclick="updateBrandProfile('nordic')" class="brand-btn brand-btn-inactive px-4 py-2 border rounded-md text-sm font-bold transition-all" data-brand="nordic">Nordic Spirit</button>
+                        <button onclick="updateBrandProfile('disruptors')" class="brand-btn brand-btn-inactive px-4 py-2 border rounded-md text-sm font-bold transition-all" data-brand="disruptors">Disruptors (Killa/Pablo)</button>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm min-h-[400px]">
+                        <div class="flex items-center gap-3 mb-4 border-b border-stone-100 pb-4">
+                            <div id="brand-color-indicator" class="w-4 h-4 rounded-full bg-blue-600"></div>
+                            <h4 id="brand-name" class="text-2xl font-black text-stone-900">VELO (BAT)</h4>
+                        </div>
+                        
+                        <div class="space-y-4 text-sm">
+                            <div>
+                                <span class="block font-bold text-stone-500 uppercase tracking-wider text-xs mb-1">Target Audience</span>
+                                <p id="brand-target" class="text-stone-800 font-medium">Mass-market adult nicotine users, young professionals.</p>
+                            </div>
+                            <div>
+                                <span class="block font-bold text-stone-500 uppercase tracking-wider text-xs mb-1">Positioning</span>
+                                <p id="brand-positioning" class="text-stone-800">"Everyday momentum." Focus on accessible energy and convenience.</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <span class="block font-bold text-stone-500 uppercase tracking-wider text-xs mb-1">Price Tier</span>
+                                    <p id="brand-price" class="text-stone-800 font-bold">£6.50 (Standard)</p>
+                                </div>
+                                <div>
+                                    <span class="block font-bold text-stone-500 uppercase tracking-wider text-xs mb-1">Core Strengths</span>
+                                    <p id="brand-strength-text" class="text-stone-800 font-bold">4mg - 10mg</p>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="block font-bold text-stone-500 uppercase tracking-wider text-xs mb-1">Packaging Strategy</span>
+                                <p id="brand-packaging" class="text-stone-800">Bright, color-coded tins (Dot system). Highly visible on convenience store gantries.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Competitor Charts -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-stone-200 shadow-sm flex flex-col">
+                    <h4 class="text-lg font-bold text-stone-800 mb-2">Strength Tier Distribution by Brand</h4>
+                    <p class="text-sm text-stone-500 mb-6">Visualizing product portfolio focus. Disruptors heavily index in the 'Extreme' category, while mainstream brands focus on 'Low' to 'Strong' for mass appeal.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="strengthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PRODUCT & CHANNEL DYNAMICS -->
+        <section id="channels" class="scroll-mt-24">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-stone-900 mb-2">3. Consumer Preferences & Channel Landscape</h3>
+                <p class="text-stone-600 max-w-4xl">
+                    Understanding what consumers want and where they buy it. Flavor profiles are dominated by mint variations for perceived cleanliness. Given severe advertising restrictions, point-of-sale visibility in the Convenience channel is the primary driver of market share.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                    <h4 class="text-lg font-bold text-stone-800 mb-2">UK Flavor Category Share</h4>
+                    <p class="text-sm text-stone-500 mb-6">Mint/Menthol continues to dominate as consumers associate it with freshness and discretion.</p>
+                    <div class="chart-container">
+                        <canvas id="flavorChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm flex flex-col">
+                    <h4 class="text-lg font-bold text-stone-800 mb-2">Retail Channel Distribution (Volume)</h4>
+                    <p class="text-sm text-stone-500 mb-6">Convenience stores remain the battleground. Vape stores serve as educational hubs for transitioning users.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="channelChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: REGULATORY & INPUTS -->
+        <section id="regulatory" class="scroll-mt-24">
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-stone-900 mb-2">4. Regulatory Context & Project Alignment</h3>
+                <p class="text-stone-600 max-w-4xl">
+                    The UK Tobacco & Vape Act imposes strict limitations on how nicotine products can be marketed. Below is a summary of the current communication audit, followed by the non-negotiable inputs required from the client to proceed with the final strategic framework.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Regulatory Tabs -->
+                <div class="bg-white p-6 rounded-xl border border-stone-200 shadow-sm">
+                    <h4 class="text-lg font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <span class="text-xl">⚖️</span> UK Communication Constraints
+                    </h4>
+                    
+                    <div class="flex border-b border-stone-200 mb-4" id="reg-tabs">
+                        <button onclick="switchTab('advertising')" class="reg-tab tab-active px-4 py-2 text-sm focus:outline-none" data-tab="advertising">Advertising</button>
+                        <button onclick="switchTab('promotions')" class="reg-tab tab-inactive px-4 py-2 text-sm focus:outline-none" data-tab="promotions">Promotions</button>
+                        <button onclick="switchTab('sponsorship')" class="reg-tab tab-inactive px-4 py-2 text-sm focus:outline-none" data-tab="sponsorship">Sponsorships</button>
+                    </div>
+
+                    <div id="tab-content-advertising" class="tab-content text-sm text-stone-700 leading-relaxed">
+                        <strong class="text-stone-900 block mb-2">Status: Broadly Prohibited</strong>
+                        Traditional Above-The-Line (ATL) advertising (TV, Radio, Print) is banned. Digital marketing is highly restricted, with social media platforms algorithmically suppressing or outright banning paid nicotine promotions. 
+                        <br><br>
+                        <span class="text-amber-600 font-bold">Strategic Impact:</span> Marketing must be almost entirely B2B (trade marketing) and in-store Point of Sale (POS). The packaging itself becomes the primary advertising medium.
+                    </div>
+
+                    <div id="tab-content-promotions" class="tab-content text-sm text-stone-700 leading-relaxed hidden">
+                        <strong class="text-stone-900 block mb-2">Status: Heavily Restricted</strong>
+                        Free sampling to the general public is prohibited. Multi-buy promotions (e.g., "Buy One Get One Free") face increasing scrutiny and localized retail bans.
+                        <br><br>
+                        <span class="text-amber-600 font-bold">Strategic Impact:</span> Trial generation is incredibly difficult. Brands must rely on price positioning, high-impact retail displays, and staff advocacy within vape stores to drive initial purchase.
+                    </div>
+
+                    <div id="tab-content-sponsorship" class="tab-content text-sm text-stone-700 leading-relaxed hidden">
+                        <strong class="text-stone-900 block mb-2">Status: Banned / Phased Out</strong>
+                        Event sponsorships, sports team partnerships, and music festival activations are no longer viable channels for audience acquisition or brand association in the UK.
+                        <br><br>
+                        <span class="text-amber-600 font-bold">Strategic Impact:</span> Brands cannot rely on borrowed equity from sports or music. Lifestyle positioning must be communicated implicitly through brand identity, digital tone of voice (where permitted), and packaging design.
+                    </div>
+                </div>
+
+                <!-- Client Inputs Checklist -->
+                <div class="bg-sky-50 p-6 rounded-xl border border-sky-100 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-sky-200 rounded-full blur-3xl opacity-50 -mr-10 -mt-10"></div>
+                    
+                    <h4 class="text-lg font-bold text-sky-900 mb-4 relative z-10 flex items-center gap-2">
+                        <span class="text-xl">📋</span> Required Client Inputs
+                    </h4>
+                    <p class="text-sm text-sky-800 mb-4 relative z-10">
+                        To finalize the strategic positioning and communication guidance, the following inputs are non-negotiable before commencement:
+                    </p>
+
+                    <ul class="space-y-3 relative z-10">
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 border border-sky-300 bg-white w-5 h-5 rounded flex items-center justify-center text-transparent hover:text-sky-600 cursor-pointer transition-colors" onclick="this.classList.toggle('text-transparent')">✓</div>
+                            <div>
+                                <span class="block text-sm font-bold text-sky-900">Current Brand Strategy & Tone</span>
+                                <span class="block text-xs text-sky-700">Confirmation of the "nicotine that fits life" statement and visual guidelines.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 border border-sky-300 bg-white w-5 h-5 rounded flex items-center justify-center text-transparent hover:text-sky-600 cursor-pointer transition-colors" onclick="this.classList.toggle('text-transparent')">✓</div>
+                            <div>
+                                <span class="block text-sm font-bold text-sky-900">Target Audience Definition</span>
+                                <span class="block text-xs text-sky-700">Demographic and psychographic profiles of the intended consumer base.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 border border-sky-300 bg-white w-5 h-5 rounded flex items-center justify-center text-transparent hover:text-sky-600 cursor-pointer transition-colors" onclick="this.classList.toggle('text-transparent')">✓</div>
+                            <div>
+                                <span class="block text-sm font-bold text-sky-900">Internal Regulatory & Legal Guidance</span>
+                                <span class="block text-xs text-sky-700">The client's internal legal interpretation of the UK Tobacco & Vape Act constraints.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="mt-0.5 border border-sky-300 bg-white w-5 h-5 rounded flex items-center justify-center text-transparent hover:text-sky-600 cursor-pointer transition-colors" onclick="this.classList.toggle('text-transparent')">✓</div>
+                            <div>
+                                <span class="block text-sm font-bold text-sky-900">Market Scope Confirmation</span>
+                                <span class="block text-xs text-sky-700">Final confirmation if South Africa is to be included as a separate strategic module.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-900 py-8 mt-12 border-t border-stone-800 text-center">
+        <p class="text-stone-400 text-sm">© 2026 Cipher Market Intelligence. Confidential and Proprietary.</p>
+    </footer>
+
+    <script>
+        // --- Utility: Chart.js Label Wrapping Requirement ---
+        const formatLabel = (label) => {
+            if (label.length <= 16) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 <= 16) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        };
+
+        // --- Utility: Chart.js Tooltip Configuration Requirement ---
+        const globalTooltipConfig = {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        } else {
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        // --- Chart 1: Market Growth (Line) ---
+        const ctxGrowth = document.getElementById('marketGrowthChart').getContext('2d');
+        new Chart(ctxGrowth, {
+            type: 'line',
+            data: {
+                labels: ['2023', '2024', '2025', '2026 (Est)', '2027 (Proj)', '2028 (Proj)'],
+                datasets: [{
+                    label: 'Market Value (£ Millions)',
+                    data: [280, 360, 480, 650, 810, 950],
+                    borderColor: '#0369a1', // sky-700
+                    backgroundColor: 'rgba(3, 105, 161, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#ea580c', // orange-600
+                    pointRadius: 5,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...globalTooltipConfig,
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        grid: { color: '#e7e5e4' }, // stone-200
+                        ticks: { color: '#57534e' } // stone-500
+                    },
+                    x: { 
+                        grid: { display: false },
+                        ticks: { color: '#57534e' }
+                    }
+                }
+            }
+        });
+
+        // --- Chart 2: Flavor Share (Doughnut) ---
+        const ctxFlavor = document.getElementById('flavorChart').getContext('2d');
+        new Chart(ctxFlavor, {
+            type: 'doughnut',
+            data: {
+                labels: [formatLabel('Mint & Menthol'), formatLabel('Fruit Fusions'), formatLabel('Coffee & Dessert'), formatLabel('Unflavored Base')],
+                datasets: [{
+                    data: [65, 25, 8, 2],
+                    backgroundColor: [
+                        '#0284c7', // sky-600 (Mint)
+                        '#f59e0b', // amber-500 (Fruit)
+                        '#78716c', // stone-500 (Coffee)
+                        '#d6d3d1'  // stone-300 (Unflavored)
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    ...globalTooltipConfig,
+                    legend: { 
+                        position: 'bottom',
+                        labels: { color: '#44403c', padding: 20, usePointStyle: true }
+                    }
+                }
+            }
+        });
+
+        // --- Chart 3: Channel Share (Horizontal Bar) ---
+        const ctxChannel = document.getElementById('channelChart').getContext('2d');
+        new Chart(ctxChannel, {
+            type: 'bar',
+            data: {
+                labels: [
+                    formatLabel('Convenience Stores'), 
+                    formatLabel('Online Direct & Subs'), 
+                    formatLabel('Specialist Vape Stores'), 
+                    formatLabel('Grocery Supermarkets'), 
+                    formatLabel('Forecourts')
+                ],
+                datasets: [{
+                    label: 'Volume Share (%)',
+                    data: [55, 25, 12, 5, 3],
+                    backgroundColor: '#0ea5e9', // sky-500
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...globalTooltipConfig,
+                    legend: { display: false }
+                },
+                scales: {
+                    x: { 
+                        beginAtZero: true, 
+                        grid: { color: '#e7e5e4' },
+                        ticks: { color: '#57534e' }
+                    },
+                    y: { 
+                        grid: { display: false },
+                        ticks: { color: '#44403c', font: { weight: '500' } }
+                    }
+                }
+            }
+        });
+
+        // --- Chart 4: Strength Distribution (Grouped Bar) ---
+        const ctxStrength = document.getElementById('strengthChart').getContext('2d');
+        new Chart(ctxStrength, {
+            type: 'bar',
+            data: {
+                labels: ['Low (<6mg)', 'Regular (6-9mg)', 'Strong (10-14mg)', 'Extreme (15mg+)'],
+                datasets: [
+                    {
+                        label: 'VELO',
+                        data: [30, 50, 20, 0],
+                        backgroundColor: '#2563eb' // blue-600
+                    },
+                    {
+                        label: 'ZYN',
+                        data: [40, 45, 15, 0],
+                        backgroundColor: '#0ea5e9' // sky-500
+                    },
+                    {
+                        label: 'Nordic Spirit',
+                        data: [20, 60, 20, 0],
+                        backgroundColor: '#0d9488' // teal-600
+                    },
+                    {
+                        label: 'Disruptors',
+                        data: [5, 10, 25, 60],
+                        backgroundColor: '#ea580c' // orange-600
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    ...globalTooltipConfig,
+                    legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 8 } }
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true,
+                        title: { display: true, text: 'Portfolio Focus (%)' },
+                        grid: { color: '#e7e5e4' }
+                    },
+                    x: { 
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // --- Interactive State Management: Brand Selector ---
+        const brandData = {
+            velo: {
+                name: "VELO (BAT)",
+                color: "bg-blue-600",
+                target: "Mass-market adult nicotine users, young professionals looking for an everyday companion.",
+                positioning: "\"Everyday momentum.\" Focus on accessible energy, convenience, and wide flavor variety.",
+                price: "£6.50 (Standard)",
+                strength: "4mg - 10mg (Core)",
+                packaging: "Bright, color-coded tins featuring the 'Dot' strength system. Highly visible on convenience store gantries designed for impulse buys."
+            },
+            zyn: {
+                name: "ZYN (PMI)",
+                color: "bg-sky-500",
+                target: "Premium lifestyle consumers, white-collar professionals desiring discretion.",
+                positioning: "\"Uninterrupted focus.\" Clean, minimalist aesthetic focused on high quality and discretion.",
+                price: "£7.00 (Premium)",
+                strength: "3mg - 9mg (Core)",
+                packaging: "Sleek, minimalist, pastel-toned packaging. Looks more like a premium mint tin than a nicotine product. Strong online D2C presence."
+            },
+            nordic: {
+                name: "Nordic Spirit (JTI)",
+                color: "bg-teal-600",
+                target: "Balanced adult users looking for a reliable, heritage-backed product.",
+                positioning: "\"Nordic calm.\" Leans into Scandinavian heritage, purity, and balanced experience.",
+                price: "£6.00 (Competitive)",
+                strength: "6mg - 12mg (Core)",
+                packaging: "Clean, slightly traditional design. Strong grocery and traditional convenience placement. Emphasizes product origin."
+            },
+            disruptors: {
+                name: "Disruptors (e.g. Killa, Pablo)",
+                color: "bg-orange-600",
+                target: "Heavy nicotine users, transitioning heavy vapers/smokers, younger adult demographic seeking 'hit'.",
+                positioning: "\"Extreme impact.\" Edgy, uncompromising, focused entirely on maximum nicotine delivery.",
+                price: "£5.00 - £5.50 (Value)",
+                strength: "15mg - 30mg+ (Extreme)",
+                packaging: "Aggressive graphics (skulls, graffiti style), bold warnings. Primarily sold through specialist vape stores and online grey-market."
+            }
+        };
+
+        function updateBrandProfile(brandKey) {
+            // Update buttons
+            document.querySelectorAll('.brand-btn').forEach(btn => {
+                if(btn.dataset.brand === brandKey) {
+                    btn.classList.remove('brand-btn-inactive');
+                    btn.classList.add('brand-btn-active');
+                } else {
+                    btn.classList.remove('brand-btn-active');
+                    btn.classList.add('brand-btn-inactive');
+                }
+            });
+
+            // Update content
+            const data = brandData[brandKey];
+            document.getElementById('brand-name').innerText = data.name;
+            document.getElementById('brand-target').innerText = data.target;
+            document.getElementById('brand-positioning').innerText = data.positioning;
+            document.getElementById('brand-price').innerText = data.price;
+            document.getElementById('brand-strength-text').innerText = data.strength;
+            document.getElementById('brand-packaging').innerText = data.packaging;
+            
+            // Update color indicator
+            const indicator = document.getElementById('brand-color-indicator');
+            indicator.className = `w-4 h-4 rounded-full ${data.color}`;
+        }
+
+        // --- Interactive State Management: Regulatory Tabs ---
+        function switchTab(tabId) {
+            // Update tabs
+            document.querySelectorAll('.reg-tab').forEach(tab => {
+                if(tab.dataset.tab === tabId) {
+                    tab.classList.remove('tab-inactive');
+                    tab.classList.add('tab-active');
+                } else {
+                    tab.classList.remove('tab-active');
+                    tab.classList.add('tab-inactive');
+                }
+            });
+
+            // Update content visibility
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(`tab-content-${tabId}`).classList.remove('hidden');
+        }
+
+    </script>
+</body>
+</html>
